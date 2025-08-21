@@ -1,0 +1,28 @@
+# OS
+.DS_Store
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# Java/Maven
+target/
+*.log
+hs_err_pid*
+replay_pid*
+dependency-reduced-pom.xml
+
+# Spring Boot
+*.classpath
+*.project
+*.settings/
+
+# Node (just in case)
+node_modules/
+
+# Docker
+**/.env
+.env
