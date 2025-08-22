@@ -1,0 +1,29 @@
+server:
+  port: 8087
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: tx-consumer-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.trusted.packages: com.acme.txconsumer.*
+        spring.json.value.default.type: com.acme.txconsumer.model.TransactionEvent
+        spring.json.use.type.headers: false
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+  cassandra:
+    contact-points: localhost
+    port: 9042
+    keyspace-name: txks
+    local-datacenter: datacenter1
+    schema-action: create_if_not_exists
+app:
+  kafka:
+    topic: tx.events
+  consumer:
+    concurrency: 2
