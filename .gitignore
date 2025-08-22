@@ -4,8 +4,6 @@
 # IDE
 .idea/
 *.iml
-*.ipr
-*.iws
 .vscode/
 
 # Java/Maven
@@ -14,15 +12,13 @@ target/
 hs_err_pid*
 replay_pid*
 dependency-reduced-pom.xml
+.settings/
+.classpath
+.project
 
-# Spring Boot
-*.classpath
-*.project
-*.settings/
-
-# Node (just in case)
+# Node
 node_modules/
 
-# Docker
+# Docker / env
 **/.env
 .env
