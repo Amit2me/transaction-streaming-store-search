@@ -1,5 +1,6 @@
 server:
   port: 8087
+
 spring:
   kafka:
     bootstrap-servers: localhost:9092
@@ -16,14 +17,27 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+  # IMPORTANT: we will provide our own CqlSession; keep Data auto-config on
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.cassandra.CassandraAutoConfiguration
+
   cassandra:
-    contact-points: localhost
-    port: 9042
-    keyspace-name: txks
-    local-datacenter: datacenter1
+    # Spring Data will use the provided session; schema-action still applies
     schema-action: create_if_not_exists
+
 app:
   kafka:
     topic: tx.events
+
   consumer:
     concurrency: 2
+
+  cassandra:
+    host: 127.0.0.1     # avoid IPv6 localhost → DC mismatch warnings
+    port: 9042
+    local-dc: datacenter1
+    keyspace: txks
+    replication:
+      class: SimpleStrategy
+      rf: 1

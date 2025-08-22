@@ -1,20 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true">
-  <springProperty scope="context" name="LOGSTASH_HOST" source="LOGSTASH_HOST" defaultValue="127.0.0.1"/>
-  <springProperty scope="context" name="LOGSTASH_PORT" source="LOGSTASH_PORT" defaultValue="5500"/>
-  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-      <providers><timestamp/><logLevel/><loggerName/><threadName/><message/><mdc/><arguments/><stackTrace/></providers>
-    </encoder>
-  </appender>
-  <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-    <destination>${LOGSTASH_HOST}:${LOGSTASH_PORT}</destination>
-    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-      <providers><timestamp/><logLevel/><loggerName/><threadName/><message/><mdc/><context/><arguments/><stackTrace/></providers>
-    </encoder>
-    <keepAliveDuration>60 seconds</keepAliveDuration>
-    <reconnectionDelay>5 seconds</reconnectionDelay>
-  </appender>
-  <root level="INFO"><appender-ref ref="CONSOLE"/><appender-ref ref="LOGSTASH"/></root>
-  <logger name="com.acme" level="DEBUG"/>
+    <springProperty scope="context" name="LOGSTASH_HOST" source="LOGSTASH_HOST" defaultValue="127.0.0.1"/>
+    <springProperty scope="context" name="LOGSTASH_PORT" source="LOGSTASH_PORT" defaultValue="5500"/>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp/>
+                <logLevel/>
+                <loggerName/>
+                <threadName/>
+                <message/>
+                <mdc/>
+                <arguments/>
+                <stackTrace/>
+            </providers>
+        </encoder>
+    </appender>
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>${LOGSTASH_HOST}:${LOGSTASH_PORT}</destination>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp/>
+                <logLevel/>
+                <loggerName/>
+                <threadName/>
+                <message/>
+                <mdc/>
+                <context/>
+                <arguments/>
+                <stackTrace/>
+                <globalCustomFields>{"service":"tx-producer"}</globalCustomFields>
+            </providers>
+        </encoder>
+        <keepAliveDuration>60 seconds</keepAliveDuration>
+        <reconnectionDelay>5 seconds</reconnectionDelay>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="LOGSTASH"/>
+    </root>
+    <logger name="com.acme" level="DEBUG"/>
 </configuration>
