@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "9696cf96-8132-43e9-a1b4-c5dc3b9cb6a2",
+		"name": "Streaming and Store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24640777"
+	},
+	"item": [
+		{
+			"name": "Tx-Producer-one",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8086/api/tx/one",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"api",
+						"tx",
+						"one"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tx-Consumer-stored",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8087/api/tx/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8087",
+					"path": [
+						"api",
+						"tx",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tx-Producer-burst-50",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8086/api/tx/burst?count=100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"api",
+						"tx",
+						"burst"
+					],
+					"query": [
+						{
+							"key": "count",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tx-Producer-Stream",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8086/api/tx/stream?count=200&ratePerSec=50",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"api",
+						"tx",
+						"stream"
+					],
+					"query": [
+						{
+							"key": "count",
+							"value": "200"
+						},
+						{
+							"key": "ratePerSec",
+							"value": "50"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

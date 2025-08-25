@@ -14,7 +14,7 @@ services:
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
     healthcheck:
-      test: ["CMD-SHELL", "/opt/bitnami/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list >/dev/null 2>&1"]
+      test: [ "CMD-SHELL", "/opt/bitnami/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list >/dev/null 2>&1" ]
       interval: 15s
       timeout: 5s
       retries: 10
@@ -44,7 +44,7 @@ services:
     volumes:
       - cassandra-data:/var/lib/cassandra
     healthcheck:
-      test: ["CMD-SHELL", "cqlsh -e 'DESCRIBE KEYSPACES' 127.0.0.1 9042 >/dev/null 2>&1 || exit 1"]
+      test: [ "CMD-SHELL", "cqlsh -e 'DESCRIBE KEYSPACES' 127.0.0.1 9042 >/dev/null 2>&1 || exit 1" ]
       interval: 20s
       timeout: 10s
       retries: 20
@@ -56,7 +56,7 @@ services:
     depends_on:
       cassandra:
         condition: service_healthy
-    entrypoint: ["/bin/bash", "-lc"]
+    entrypoint: [ "/bin/bash", "-lc" ]
     command: |
       set -e
       echo "Waiting for Cassandra..."

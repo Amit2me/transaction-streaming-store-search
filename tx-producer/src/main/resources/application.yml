@@ -15,3 +15,14 @@ spring:
 app:
   kafka:
     topic: tx.events
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      service: tx-producer

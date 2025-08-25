@@ -1,4 +1,5 @@
 # 💼 Transaction Streaming Demo
+
 **Java 21 • Spring Boot 3.4.x • Kafka • Cassandra • ELK (Elasticsearch + Logstash + Kibana)**
 
 Two microservices that simulate a payments pipeline:
@@ -8,7 +9,8 @@ Two microservices that simulate a payments pipeline:
 - Optional **ELK**: centralized JSON logs (Logstash → Elasticsearch → Kibana)
 - Provided **Docker Compose** for Kafka (KRaft) + Kafka UI + Cassandra (+ keyspace init) and for ELK
 
-> This README is **self-contained** and **step-by-step**. Follow it top-to-bottom to run on any machine with Docker, Java 21, and Maven.
+> This README is **self-contained** and **step-by-step**. Follow it top-to-bottom to run on any machine with Docker,
+> Java 21, and Maven.
 
 ---
 
@@ -57,6 +59,9 @@ docker exec -it cassandra cqlsh -e "DESCRIBE KEYSPACE txks"   # should list the 
 
 # 2) (Optional) ELK logs stack (host port 5500 → container 5000)
 docker compose -f docker-compose.elk.yml up -d
+
+# 2.1) Run Prometheus:
+docker compose -f docker-compose.metrics.yml up -d
 
 # 3) Run producer (port 8086)
 export LOGSTASH_HOST=127.0.0.1 LOGSTASH_PORT=5500   # only if ELK running

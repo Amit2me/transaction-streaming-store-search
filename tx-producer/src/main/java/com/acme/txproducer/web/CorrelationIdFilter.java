@@ -11,7 +11,9 @@ import reactor.core.publisher.Mono;
 import java.util.Optional;
 import java.util.UUID;
 
-/** Adds/propagates X-Correlation-Id and puts it into MDC for logging. */
+/**
+ * Adds/propagates X-Correlation-Id and puts it into MDC for logging.
+ */
 @Component
 public class CorrelationIdFilter implements WebFilter {
     public static final String HEADER = "X-Correlation-Id";
